@@ -7,5 +7,5 @@ EXPOSE 80
 EXPOSE 27015/udp
 EXPOSE 27015/tcp
 RUN echo "Server is Running" > index.html
-# Додаємо команду 'stats' через 15 секунд після старту, щоб воно виплюнуло інфу в логи
-CMD bash -c "python3 -m http.server 80 & sleep 15 && ./hlds_run -game cstrike -strictportbind +ip 0.0.0.0 +port 27015 +maxplayers 32 +map de_dust2 +rcon_password 1w2q789rs & sleep 30 && echo '--- SERVER STATUS ---' && ./hlds_run -command stats"
+# Запускаємо ТІЛЬКИ один процес
+CMD bash -c "python3 -m http.server 80 & ./hlds_run -game cstrike -strictportbind +ip 0.0.0.0 +port 27015 +maxplayers 32 +map de_dust2 +rcon_password 1w2q789rs"
