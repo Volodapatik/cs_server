@@ -17,3 +17,4 @@ EXPOSE 27015/tcp
 
 # Запуск сервера
 CMD ["./hlds_run", "-game", "cstrike", "+ip", "0.0.0.0", "+maxplayers", "16", "+map", "de_dust2", "-nomaster", "-noipx"]
+ 
