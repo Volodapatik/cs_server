@@ -1,20 +1,22 @@
-FROM --platform=linux/386 i386/debian:bullseye-slim
+# Використовуємо образ, який вже іде під i386 архітектуру за замовчуванням
+FROM i386/debian:bullseye-slim
 
-# Встановлюємо необхідні ліби
-RUN apt-get update && apt-get install -y libstdc++6 wget ca-certificates
+# Додаємо силу, щоб apt-get знав, що ми на 32-бітах
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends libstdc++6 wget ca-certificates
 
 WORKDIR /app
 
-# Копіюємо всі твої файли в контейнер
+# Копіюємо файли
 COPY . .
 
-# Робимо файли виконуваними
+# Робимо виконуваними
 RUN chmod +x hlds_run hlds_linux
 
-# Відкриваємо порти для гри
+# Порти
 EXPOSE 27015/udp
 EXPOSE 27015/tcp
 
-# Запуск сервера
+# Запуск
 CMD ["./hlds_run", "-game", "cstrike", "+ip", "0.0.0.0", "+port", "27015", "+maxplayers", "32", "+map", "de_dust2"]
-
