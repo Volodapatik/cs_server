@@ -3,8 +3,7 @@ RUN dpkg --add-architecture i386 &&     apt-get update &&     apt-get install -y
 WORKDIR /app
 COPY . .
 RUN chmod +x hlds_run hlds_linux
+EXPOSE 80
 EXPOSE 27015/udp
 EXPOSE 27015/tcp
-EXPOSE 80
-# Запускаємо веб-сервер на фоні + сам HLDS
-CMD python3 -m http.server 80 & ./hlds_run -game cstrike -strictportbind +ip 0.0.0.0 +port 27015 +maxplayers 32 +map de_dust2 +rcon_password 1w2q789rs
+CMD python3 -m http.server 80 & ./hlds_run -game cstrike -strictportbind +ip 0.0.0.0 +port 27015 +maxplayers 32 +map de_dust2 +rcon_password 1w2q789rs & wait -n
