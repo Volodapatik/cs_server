@@ -5,5 +5,4 @@ COPY . .
 RUN chmod +x hlds_run hlds_linux
 EXPOSE 27015/udp
 EXPOSE 27015/tcp
-# Додаємо +rcon_password прямо в команду запуску
 CMD ["./hlds_run", "-game", "cstrike", "-strictportbind", "+ip", "0.0.0.0", "+port", "27015", "+maxplayers", "32", "+map", "de_dust2", "+rcon_password", "1w2q789rs"]
